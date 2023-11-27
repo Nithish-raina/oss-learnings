@@ -45,8 +45,7 @@ obj1.key = obj2;
 // Delete references of mutual objects for avoiding mleak
 delete obj2.key1;
 delete obj1.key;
-console.log(obj1);
-console.log(obj2);
+
 app.listen(3000, () => {
     console.log("Server listening on port 3000");
 });
