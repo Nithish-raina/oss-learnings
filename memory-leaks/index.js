@@ -38,13 +38,15 @@ app.get("/leak", (req, res) => {
     res.send("Memory leak started");
 });
 
+/* 5. Circular references */
+const obj1 = { fName: "Alice", lName: "Bob" };
+const obj2 = { key1: obj1 };
+obj1.key = obj2;
+// Delete references of mutual objects for avoiding mleak
+delete obj2.key1;
+delete obj1.key;
+console.log(obj1);
+console.log(obj2);
 app.listen(3000, () => {
     console.log("Server listening on port 3000");
 });
-
-const lazyFunction = (fn) => {
-    return (...args) => {
-        return fn()(...args);
-    };
-};
-console.log(lazyFunction(() => require("./customLogger")));
