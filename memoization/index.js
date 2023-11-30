@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+
+/* 1. Memoizing imports */
 const memoizeImports = (fn) => {
     let cache = false;
     let result = undefined;
@@ -40,13 +42,23 @@ const complexComputation = (a, b) => {
     // return a * b;
 };
 
-console.log(memoizedImport()); // performs file import
-console.log(memoizedImport()); // uses cached result
+// console.log(memoizedImport()); // performs file import
+// console.log(memoizedImport()); // uses cached result
 
 const memoizedComputation = memoizeComputation(complexComputation);
-console.log(memoizedComputation(2, 3)); // computes value
-console.log(memoizedComputation(5, 2)); // computes value
-console.log(memoizedComputation(2, 3)); // returns cached result
+// console.log(memoizedComputation(2, 3)); // computes value
+// console.log(memoizedComputation(5, 2)); // computes value
+// console.log(memoizedComputation(2, 3)); // returns cached result
+
+/* 3. Returning an anonymous function -> returns a function */
+const f1 = (caller) => `I'm F1 called by ${caller}`;
+const f2 = () => {
+    return (callerName) => {
+        return f1;
+    };
+};
+const resultOfAnonymousFn = f2();
+console.log(resultOfAnonymousFn()("f2"));
 
 app.get("/", (req, res) => {
     res.send("Welcome Home");
