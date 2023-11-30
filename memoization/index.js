@@ -11,6 +11,7 @@ const memoizeImports = (fn) => {
             console.log("Performing file import operation");
             result = fn();
             cache = true;
+            fn = undefined;
             return result;
         }
     };
